@@ -9,6 +9,7 @@ import IconButton from '@/components/IconButton';
 import ImageViewer from "@/components/ImageViewer";
 import EmojiPicker from '@/components/EmojiPicker';
 import CircleButton from "@/components/CircleButton";
+import EmojiSticker from '@/components/EmojiSticker';
 
 const PlaceholderImage = require("@/assets/images/background-image.png");
 
@@ -35,6 +36,7 @@ export default function Index() {
   const onReset = () => {
     setShowAppOptions(false);
     setSelectedImage(null);
+    setPickedEmoji(undefined);
   }
 
   const onModalClose = () => {
@@ -58,6 +60,7 @@ export default function Index() {
           imageSource={PlaceholderImage}
           selectedImage={selectedImage}
         />
+        {pickedEmoji && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />}
       </View>
       {showAppOptions ? (
         <View style={styles.optionsContainer}>

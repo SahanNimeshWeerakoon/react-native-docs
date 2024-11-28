@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { type ImageSource } from 'expo-image';
 import { View, StyleSheet } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
+import * as MediaLibrary from 'expo-media-library';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import Button from "@/components/Button";
@@ -16,9 +17,12 @@ const PlaceholderImage = require("@/assets/images/background-image.png");
 
 export default function Index() {
   const [selectedImage, setSelectedImage] = useState<any>();
+  const [status, requestPermission] = MediaLibrary.usePermissions();
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [pickedEmoji, setPickedEmoji] = useState<ImageSource | undefined>();
+
+  if(status === null) requestPermission();
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({

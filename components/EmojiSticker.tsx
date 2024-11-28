@@ -24,7 +24,9 @@ export default function EmojiSticker({ imageSize, stickerSource }: Props) {
     })
     return (
         <View style={{ top: -350 }}>
-            <Animated.Image source={stickerSource} style={{  width: imageSize, height: imageSize }} />
+            <GestureDetector gesture={doubleTap}>
+                <Animated.Image source={stickerSource} style={[imageStyle, {  width: imageSize, height: imageSize }]} />
+            </GestureDetector>
         </View>
     );
 }
